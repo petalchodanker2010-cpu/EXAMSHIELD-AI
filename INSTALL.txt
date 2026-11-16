@@ -1,0 +1,19 @@
+ExamShield AI 0.4.3 — website download guide
+
+The all-browser download contains two separate ZIP files. Extract the top-level download first.
+
+CHROME, EDGE, BRAVE, OPERA, OPERA GX
+1. Extract ExamShield-AI-Chromium-v0.4.3.zip from the folder you just extracted.
+2. Open the browser's extensions page: chrome://extensions, edge://extensions, brave://extensions, or opera://extensions.
+3. Turn on Developer mode and choose Load unpacked. Select the extracted Chromium folder containing manifest.json and the icons folder.
+4. Pin the ExamShield AI shield icon, grant access to supported websites, and reload those websites.
+
+FIREFOX
+1. Extract ExamShield-AI-Firefox-Safari-v0.4.3.zip.
+2. Open about:debugging → This Firefox → Load Temporary Add-on.
+3. Select manifest.json. A temporary add-on is removed when Firefox restarts; public distribution requires a Mozilla-signed build.
+
+SAFARI
+The Firefox/Safari ZIP contains shared WebExtension source. Safari requires macOS and Apple's Safari Web Extension packaging workflow in Xcode (or App Store Connect). This ZIP is not a one-click Safari installation.
+
+This extension is an experimental prototype. See README.md inside the browser package for supported sites, privacy details, warning levels, and limitations.
