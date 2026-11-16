@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="ExamShield AI home">
       <img src="icon-48.png" alt="">
@@ -31,12 +32,12 @@
         <div class="hero-actions"><a class="button primary" href="#demo">Try the interactive demo <span>↓</span></a><a class="button ghost" href="#solution">Explore the idea</a></div>
         <p class="hero-note"><span class="check">✓</span> The demo checks files locally in your browser. It does not upload them.</p>
       </div>
-      <div class="hero-art" aria-label="Illustration of a protected examination paper">
+      <div class="hero-art" id="heroArt" aria-label="Illustration of a protected examination paper">
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
         <div class="shield"><div class="shield-inner">E</div></div>
         <div class="floating-card card-top"><span class="tiny-icon">✓</span><span><b>Two-person approval</b><small>Independent review</small></span></div>
         <div class="floating-card card-bottom"><span class="tiny-icon blue">⌁</span><span><b>Local file check</b><small>Your file stays on device</small></span></div>
-        <div class="art-caption">A safer chain of custody</div>
+        <div class="art-caption"><span class="caption-dot"></span> A safer chain of custody</div>
       </div>
       <div class="hero-foot"><span>01 &nbsp; PREVENT</span><span>02 &nbsp; DETECT</span><span>03 &nbsp; TRACE</span></div>
     </section>
@@ -51,12 +52,13 @@
     <section class="solution section" id="solution">
       <div class="wrap">
         <div class="section-heading"><div><div class="eyebrow">OUR APPROACH</div><h2>More than one set of eyes.</h2></div><p>A proposed multi-level authorization workflow puts checks around the paper, its access, and its release.</p></div>
-        <div class="steps">
+        <div class="steps" aria-label="Explore the four steps. Select a step for details.">
           <article class="step"><div class="step-number">01</div><div class="step-icon">✎</div><h3>Create securely</h3><p>The paper setter prepares the exam paper in a controlled environment.</p></article>
           <article class="step"><div class="step-number">02</div><div class="step-icon">⌑</div><h3>Protect & identify</h3><p>The proposal uses encryption and a unique document identifier to support tracking.</p></article>
           <article class="step"><div class="step-number">03</div><div class="step-icon">◎</div><h3>Independent approval</h3><p>A separate examination controller reviews and authorizes release. The creator cannot approve alone.</p></article>
           <article class="step"><div class="step-number">04</div><div class="step-icon">⌁</div><h3>Log & release</h3><p>Access is recorded, unusual activity can be reviewed, and release follows the approved time.</p></article>
         </div>
+        <div class="step-detail" id="stepDetail" aria-live="polite"><span class="detail-index">01</span><p><b>Start with a controlled workspace.</b> The paper setter prepares the document where access can be supervised and recorded.</p><span class="detail-hint">SELECT A STEP TO EXPLORE <span>↗</span></span></div>
         <div class="insider-card"><div class="insider-symbol">!</div><div><b>What about a secret photograph?</b><p>A camera can bypass digital controls. Controlled viewing, supervision, restricted copying, and individually watermarked copies can reduce risk and support investigation—but cannot make photography impossible.</p></div></div>
       </div>
     </section>

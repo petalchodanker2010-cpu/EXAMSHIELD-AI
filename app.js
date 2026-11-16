@@ -73,3 +73,63 @@ mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () 
   menuToggle.setAttribute('aria-expanded', 'false');
 }));
 
+// Small, device-friendly interactions make the showcase feel alive without a heavy 3D library.
+const progress = document.querySelector('#scrollProgress');
+const topbar = document.querySelector('.topbar');
+function updateScrollChrome() {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  if (progress) progress.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
+  topbar?.classList.toggle('scrolled', scrollY > 12);
+  document.documentElement.style.setProperty('--scene-shift', `${Math.round(scrollY * 0.08)}px`);
+}
+addEventListener('scroll', updateScrollChrome, { passive: true });
+updateScrollChrome();
+
+const revealItems = document.querySelectorAll('.section-heading, .problem-grid > *, .step, .insider-card, .demo-intro, .scan-panel, .level, .sdg-grid > *, .download-wrap > *, .limits-inner');
+if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('reveal', 'in-view');
+      revealObserver.unobserve(entry.target);
+    }
+  }), { threshold: 0.12 });
+  revealItems.forEach(item => revealObserver.observe(item));
+}
+
+const workflowSteps = [...document.querySelectorAll('.steps .step')];
+const stepDetail = document.querySelector('#stepDetail');
+const workflowCopy = [
+  ['01', 'Start with a controlled workspace.', 'The paper setter prepares the document where access can be supervised and recorded.'],
+  ['02', 'Give the paper a protected identity.', 'Encryption and a unique document identifier are proposed safeguards that help protect and track the approved file.'],
+  ['03', 'Separate creation from approval.', 'An independent examination controller reviews the paper. The creator cannot authorize its release alone.'],
+  ['04', 'Keep a record and release on schedule.', 'Access events can be logged and reviewed. Authorized users receive the paper only at the approved time.']
+];
+workflowSteps.forEach((step, index) => {
+  step.tabIndex = 0;
+  step.setAttribute('role', 'button');
+  step.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+  const selectStep = () => {
+    workflowSteps.forEach(item => { item.classList.remove('selected'); item.setAttribute('aria-pressed', 'false'); });
+    step.classList.add('selected');
+    step.setAttribute('aria-pressed', 'true');
+    if (stepDetail) {
+      stepDetail.querySelector('.detail-index').textContent = workflowCopy[index][0];
+      stepDetail.querySelector('p').innerHTML = `<b>${workflowCopy[index][1]}</b> ${workflowCopy[index][2]}`;
+    }
+  };
+  step.addEventListener('click', selectStep);
+  step.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectStep(); } });
+});
+workflowSteps[0]?.classList.add('selected');
+
+const heroArt = document.querySelector('#heroArt');
+if (heroArt && matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  heroArt.addEventListener('pointermove', event => {
+    const rect = heroArt.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    heroArt.style.transform = `perspective(900px) rotateY(${x * 7}deg) rotateX(${-y * 6}deg)`;
+  });
+  heroArt.addEventListener('pointerleave', () => { heroArt.style.transform = ''; });
+}
+
