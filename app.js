@@ -89,11 +89,15 @@ const revealItems = document.querySelectorAll('.section-heading, .problem-grid >
 if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('reveal', 'in-view');
+      entry.target.classList.add('in-view');
       revealObserver.unobserve(entry.target);
     }
   }), { threshold: 0.12 });
-  revealItems.forEach(item => revealObserver.observe(item));
+  revealItems.forEach((item, index) => {
+    item.classList.add('reveal');
+    item.style.setProperty('--reveal-delay', `${Math.min(index % 4, 3) * 90}ms`);
+    revealObserver.observe(item);
+  });
 }
 
 const workflowSteps = [...document.querySelectorAll('.steps .step')];
